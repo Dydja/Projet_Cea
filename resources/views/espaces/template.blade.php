@@ -6,6 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -996,7 +997,7 @@
     <!-- Vendor JS -->
     <script src="{{ asset('vertical/src/js/vendors.min.js') }}"></script>
     <script src="{{ asset('vertical/src/js/pages/chat-popup.js') }}"></script>
-    <script src="{{ asset('icons/feather-icons/feather.min.js') }}"></script>
+    <script src="{{ asset('assets/icons/feather-icons/feather.min.js') }}"></script>
     <script src="{{ asset('assets/vendor_components/jquery.peity/jquery.peity.js') }}"></script>
 
 	<script src="{{ asset('assets/vendor_components/Magnific-Popup-master/dist/jquery.magnific-popup.min.js') }}"></script>
@@ -1014,8 +1015,10 @@
     <script src="{{ asset('vertical/src/js/pages/app-ticket.js') }}"></script>
     <script src="{{ asset('assets/vendor_components/datatable/datatables.min.js') }}"></script>
 
-@yield('js')
+    <script src="{{ asset('assets/vendor_components/dropzone/dropzone.js') }}"></script>
+    <script src="{{ asset('vertical/src/js/pages/project-table.js') }}"></script>
 
+@yield('js')
 </body>
 
 <!-- Mirrored from crm-admin-dashboard-template.multipurposethemes.com/project_management/vertical/main/box_basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Oct 2021 12:03:05 GMT -->

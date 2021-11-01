@@ -1,145 +1,155 @@
-<script type="text/javascript">
-    function Calculer(){
 
-     var nbr1, nbr2, sum;
-             nbr1 = Number(document.getElementById("cout").value );
-             nbr2 = Number(document.getElementById("frais").value);
-             document.getElementById("amount").value = nbr1 + nbr2;
-             //document.getElementById("sum").value = sum;
-             //alert(sum);
-    }
-</script>
-@extends("espaces.template")
+  @extends('espaces.template')
 
-@section("menu")
- @include("espaces.menu.menu3")
-@endsection
+  @section("menu")
+  @include("espaces.menu.menu2")
+  @endsection
 
-@section("container")
+  @section('container')
 
-      
-		<!-- Main content -->
-		<section class="content" >
+    <!-- Main content -->
+    <section class="content">
 
-			<!--/.col (left) style="display: flex;align-item;position:absolute;justify-content:space-between;top:50px;left:50px;transform:translate(-50%,50%)"-->
-			<!-- right column -->
+      <!-- tabs -->
 
-             <!--Message d'alerte de succes-->
-                @if(session()->has("success"))
-                    <div class="alert alert-success alert-dismissible">
-                    <h3>  {{ session()->get('success') }}</h3>
-                    </div>
-                @endif
-            <!--EndMessage -->
+      <div class="row ">
+       <!-- /.col -->
 
-			<div class="col-12" >
-			  <!-- Horizontal Form -->
-			  <div class="box" >
-                <!--<p>Vous avez //{ auth()->user()->file->count() }} documents <button>Voir les documents</button></p>-->
-				<div class="box-header with-border">
-				  <h4 class="box-title">Formulaire de soumission des factures</h4>
-				</div>
-                <!--gestion des erreurs-->
-                   @if ($errors->any())
-                   <div class="alert alert-danger alert-dismissible">
-                       <ul>
-                        @foreach ($errors->all() as $error )
-                          <li>{{ $error }}</li>
-                        @endforeach
-                       </ul>
-                   </div>
-                   @endif
-                    <!--End gestion -->
-                <form class="form" method="post" enctype="multipart/form-data" action="{{ route('traitement.factures') }}">
-                    @csrf
-                    <div class="box-body">
-                        <div class="form-group">
-                            <h5 class="form-label">Coût de la prestation<span class="text-danger">*</span></h5>
-                            <div class="input-group mb-3">
-                                <input type="text" name="cout_prestation" id="cout" class="form-control" placeholder="le coût" >
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <h5 class="form-label">Frais de la prestation<span class="text-danger">*</span></h5>
-                            <div class="input-group mb-3">
-                                <input type="text" name="frais_dossier" id="frais" class="form-control"  placeholder="Les frais de prestation">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <h5>Nom du client<span class="text-danger">*</span></h5>
-                            <div class="input-group mb-3">
-                                <input type="text" name="clients" class="form-control"  placeholder="Les frais de prestation">
-                            </div>
-                       
-                        <div class="form-group">
-                            <h5>Montant total<span class="text-danger">*</span></h5>
-                            <div class="input-group mb-3">
-                                <input type="text" name="amount_total" id="amount" class="form-control"  placeholder="Les frais de prestation">
-                                 <input type="button" value="Calculer" class="btn btn-warning btn-sm" onclick="Calculer();">
-                            </div> 
-                        </div>
-                        
+          <div class="col-12">
+              <div class="box">
+               <!-- <div class="box-header with-border">
+                  <h6 class="box-subtitle">Use default tab with class <code>customtab</code></h6>
+                </div>-->
+              <div class="col-lg-4 col-12">
+                  <div class="box-body">
 
-                        <div class="box-footer small-footer">
-                            <a href="{{ route('manager.dashboard') }}" class="btn btn-warning me-1" ><i class="ti-trash"></i> Annuler</a>
+                      <button type="button" class="waves-effect waves-light btn btn-outline btn-rounded btn-success-light mb-5" data-bs-toggle="modal" data-bs-target="#manager-modal">
+                  Valider les paiements
+                      </button>
 
-                            <button type="submit" class="btn btn-primary">
-                              <i class="ti-save-alt"></i> Envoyer
-                            </button>
+                  </div>
+              </div><!-- /.col -->
+              @include('manager.modal.index')
+                <!-- /.box-header -->
+             </div>
+        </div>
 
-                        </div>
-                    </div>
-                    <!-- /.box-body -->
+    </div>
 
-                </form>
+    <div class="box-body">
+        <div class="col-12">
+            <div class="box">
+              <div class="box-header with-border">
+                <h4 class="box-title">La Liste des factures scanées payées</h4>
+                <div class="box-controls pull-right">
+                  <div class="lookup lookup-circle lookup-right">
+                    <input type="text" name="s">
+                  </div>
+                </div>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body no-padding">
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      <tr>
+                        <th>Invoice</th>
+                        <th>User</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Country</th>
+                      </tr>
+                      <tr>
+                        <td><a href="javascript:void(0)">Order #123456</a></td>
+                        <td>Lorem Ipsum</td>
+                        <td><span class="text-muted"><i class="fa fa-clock-o"></i> Oct 16, 2017</span> </td>
+                        <td>$158.00</td>
+                        <td><span class="badge badge-pill badge-danger">Pending</span></td>
+                        <td>CH</td>
+                      </tr>
+                      <tr>
+                        <td><a href="javascript:void(0)">Order #458789</a></td>
+                        <td>Lorem Ipsum</td>
+                        <td><span class="text-muted"><i class="fa fa-clock-o"></i> Oct 16, 2017</span> </td>
+                        <td>$55.00</td>
+                        <td><span class="badge badge-pill badge-warning">Shipped</span></td>
+                        <td>US</td>
+                      </tr>
+                      <tr>
+                        <td><a href="javascript:void(0)">Order #84532</a></td>
+                        <td>Lorem Ipsum</td>
+                        <td><span class="text-muted"><i class="fa fa-clock-o"></i> Oct 16, 2017</span> </td>
+                        <td>$845.00</td>
+                        <td><span class="badge badge-pill badge-danger">Prossing</span></td>
+                        <td>IG</td>
+                      </tr>
+                      <tr>
+                        <td><a href="javascript:void(0)">Order #48956</a></td>
+                        <td>Lorem Ipsum</td>
+                        <td><span class="text-muted"><i class="fa fa-clock-o"></i> Oct 16, 2017</span> </td>
+                        <td>$145.00</td>
+                        <td><span class="badge badge-pill badge-success">Paid</span></td>
+                        <td>EN</td>
+                      </tr>
+                      <tr>
+                        <td><a href="javascript:void(0)">Order #92154</a></td>
+                        <td>Lorem Ipsum</td>
+                        <td><span class="text-muted"><i class="fa fa-clock-o"></i> Oct 16, 2017</span> </td>
+                        <td>$450.00</td>
+                        <td><span class="badge badge-pill badge-warning">Shipped</span></td>
+                        <td>UK</td>
+                      </tr>
+                    </table>
+                  </div>
+              </div>
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+          </div>
+          </div>
+
+    <!-- /.content -->
+   </div>
+
+  </section>
+
+  @endsection
 
 
-				<!-- /.box-header -->
-				<!-- form start -->
-				<!--<form class="form-horizontal form-element">
-				  <div class="box-body">
-					<div class="form-group row">
-					  <label for="title" class="col-sm-2 form-label">Titre</label>
 
-					  <div class="col-sm-10">
-						<input type="text" class="form-control" name="title" placeholder="Entrer le titre du document">
-					  </div>
-					</div>
-					<div class="form-group row">
-					  <label for="inputPassword3" class="col-sm-2 form-label">Password</label>
 
-					  <div class="col-sm-10">
-						<input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-					  </div>
-					</div>
-					<div class="form-group row">
-					  <div class="ms-auto col-sm-10">
-						<div class="checkbox">
-							<input type="checkbox" id="Remember">
-							<label for="Remember">Remember me</label>
-						</div>
-					  </div>
-					</div>
-				  </div>
-				  /.box-body
-				  <div class="box-footer">
-					<button type="submit" class="btn btn-danger">Cancel</button>
-					<button type="submit" class="btn btn-info pull-right">Sign in</button>
-				  </div>
-				   /.box-footer
-				</form>-->
-			  </div>
-			  <!-- /.box -->
 
-			</div>
-			<!--/.col (right) -->
-		  </div>
-		  <!-- /.row -->
 
-		</section>
-		<!-- /.content -->
 
-@endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

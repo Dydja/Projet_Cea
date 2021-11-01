@@ -30,18 +30,30 @@ class FacturesController extends Controller
             'frais_dossier' =>'required|string',
             'clients' =>'required|string',
             'amount_total' =>'required|string',
-
+            'staus_amount' =>'required|string',
 
         ]);
+
+        /**
+         * TRAITREMENT DU FACTURE SCANNEE
+         */
+
+
 
         $factures = new Facture;
         $factures->cout_prestation = $request->cout_prestation;
         $factures->frais_dossier = $request->frais_dossier;
         $factures->clients = $request->clients;
         $factures->amount_total = $request->amount_total;
+        $factures->staus_amount = $request->staus_amount;
         $factures->user_id = Auth::user()->id;
 
-        $factures->save();
+        /**
+         * RECUPERATION DE LA FACTURE POUR L'ENREGISTRER AVEC LES AUTRES ELEMENTS
+         */
+
+
+         $factures->save();
 
         return dd($factures);
 

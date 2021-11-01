@@ -11,6 +11,7 @@ use App\Model\Role;
 use App\Model\Document;
 use App\Model\Gerant;
 use App\Model\Facture;
+use App\Model\ScannedInvoice;
 
 class User extends Authenticatable
 {
@@ -59,5 +60,9 @@ class User extends Authenticatable
 
      public function factures(){
          return $this->hasMany(Facture::class);
+     }
+
+     public function scanned_invoices(){
+         return $this->hasMany(ScannedInvoice::class);
      }
 }

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\FacturesController;
+use App\Http\Controllers\ScannedInvoiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,7 +96,26 @@ Route::get('/logout', [AuthenticatedSessionController::class, 'destroy']) ->midd
  * ROUTE POUR LA RECEPTION DES FACTURES SUR LE DASHBOARD CLIENT
  */
 Route::get('/customer/factures',[CustomerController::class,'facture'])->name('customer.factures');
+//Route::get('/customer/factures',[ScannedInvoiceController::class,'create'])->name('invoice');
+Route::post('/customer/factures',[CustomerController::class,'store'])->name('traitement.invoice');
 
+/**
+ * DOWNLOAD FILE ROUTE
+ */
+
+Route::get('/customer/factures/pdf',[CustomerController::class, 'createPDF'])->name('factures.pdf');
+Route::get('/bar',[CustomerController::class,'bar'])->name('test.bar');
+/*Route::get('/bar', function () {
+    return new App\Mail\CustomerMail([
+      'name' => 'Durand',
+      'email' => 'durand@chezlui.com',
+      'message' => 'Je voulais vous dire que votre site est magnifique !'
+      ]);
+});*/
+
+//Route::post('/customer/factures',[CustomerController::class,'store'])->name('invoice');
+/*Route::get('/customer/factures/scanne',[ScannedInvoiceController::class,'invoice'])->name('invoices');
+Route::get('/customer/actures/scanne',[ScannedInvoiceController::class,'storage'])->name('invoice');*/
 
 /*Route::group(['prefix'=>'admin','middleware'=>['Isadmin','auth','black.list']],function(){
     Route::get('/admin',[AdminController::class,'index'])->name('admin.dashboard');

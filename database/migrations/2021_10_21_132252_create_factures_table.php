@@ -20,6 +20,7 @@ class CreateFacturesTable extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('clients');
             $table->string('amount_total');
+            $table->string('staus_amount');
             $table->timestamps();
         });
 
