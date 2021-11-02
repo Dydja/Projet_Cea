@@ -56,15 +56,15 @@ class CustomerController extends Controller
           */
           $request->validate([
              // 'user_id' => 'required',
-              'scanned_invoices' => 'required|mimes:pdf,docx|max:1024',
+              'scanned' => 'required|mimes:pdf,docx|max:1024',
           ]);
 
         $invoices =  new ScannedInvoice;
         $invoices->user_id = Auth::user()->id;
 
-        $scanned_invoices = uniqid() .$request->scanned_invoices->getClientOriginalName();
-        $fileName = $request->file('scanned_invoices')->storeAs('Factures',$scanned_invoices,'public');
-        $invoices->scanned_invoices = 'storage /'.$fileName;
+        $scanned = uniqid() .$request->scanned->getClientOriginalName();
+        $fileName = $request->file('scanned')->storeAs('Factures',$scanned,'public');
+        $invoices->scanned = 'storage /'.$fileName;
         $invoices->save;
 
         return dd($invoices);
@@ -109,10 +109,7 @@ class CustomerController extends Controller
 
 
 
-     //   return view('confirm');
 
-
-      //
 
 
 }

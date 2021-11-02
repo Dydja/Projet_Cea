@@ -23,15 +23,20 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
+                    <div class="controls">
+                        <input type="hidden" name="user_id" multiple class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group">
                     <h5>Selectionne le document<span class="text-danger">*</span></h5>
                     <div class="controls">
-                        <input type="file" name="scanned_invoices" multiple class="form-control" accept="image/pdf,image/docx" required>
+                        <input type="file" name="scanned" multiple class="form-control" required>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer modal-footer-uniform">
+            <div class="">
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary float-end">Save changes</button>
+              <button type="submit" class="btn btn-primary ">Save changes</button>
             </div>
           </div>
         </div>

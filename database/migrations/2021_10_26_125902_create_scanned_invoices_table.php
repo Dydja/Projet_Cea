@@ -15,10 +15,17 @@ class CreateScannedInvoicesTable extends Migration
     {
         Schema::create('scanned_invoices', function (Blueprint $table) {
             $table->id();
-            $table->string('scanned_invoices');
+            $table->string('scanned');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
+
+         /**
+         * Activons les clÃ©s etrangeres
+         *
+         * @return void
+         */
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -28,6 +35,9 @@ class CreateScannedInvoicesTable extends Migration
      */
     public function down()
     {
+        Schema::table('scanned_invoices',function(Blueprint $table){
+            $table->dropForeign(['user_id']);
+        });
         Schema::dropIfExists('scanned_invoices');
     }
 }
